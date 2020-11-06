@@ -230,9 +230,35 @@ public void shellMain() {
   spiResetMp3();                                    //   プロセスが実行する
   mp3FilesInit();                                   // ファイル一覧を作る
   demoScreen();                                     // 画面を初期化
+  int cnt=0;
+  for (;;) {                                        // pwd画面
+    int sw = readSw();
+    int num = swToNum(sw);
+    demoScreen1();
+    if (num==1||num==5) {
+      if(num==1&&cnt==0){
+        cnt=cnt+1;
+      }
+      else cnt=0;
+      if(num==5&&cnt==1){
+        cnt=cnt+1;
+      }
+      else cnt=0;
+      if(num==1&&cnt==2){
+        cnt=cnt+1;
+      }
+      else cnt=0;
+      if(num==5&&cnt==3){
+        break;
+      }
+      else cnt=0;
+    }
+    sleep(10);                                      // 10ms に一度
+  }
   for (;;) {
     int sw = readSw();
     int num = swToNum(sw);
+
     if (num==6) {                                   // 6 番のスイッチが押された
       dbgPutStr("stop\n");
       demoScreen();                                 // 画面を初期化

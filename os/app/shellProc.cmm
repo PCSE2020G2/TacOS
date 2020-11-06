@@ -247,6 +247,7 @@ public void shellMain() {
         if(num==5){
           sceneIndex=1;
           demoScreen2();
+          asta(index);
           break;
         }
         else cnt=0;
@@ -349,6 +350,7 @@ public void shellMain() {
         else if(sceneIndex==2) demoScreen3();
         else if(sceneIndex==3) demoScreen4();
         else if(sceneIndex==4) demoScreen5();
+        asta(index);
       }
     }
 

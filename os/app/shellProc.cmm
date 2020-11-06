@@ -267,6 +267,7 @@ public void shellMain() {
       else if(cnt==3){
         if(num==5){
           sceneIndex=1;
+          demoScreen2();
           break;
         }
         else cnt=0;
@@ -285,7 +286,9 @@ public void shellMain() {
       }
       else if(num==3){
         sceneIndex=2;
+        index=0;
       }
+
       asta(index);
     }
 
@@ -296,6 +299,11 @@ public void shellMain() {
       }
       else if(num==3){
         sceneIndex=2;
+        index=0;
+      }
+      else if(num==2){
+        sceneIndex=sceneIndex-1;
+        index=0;
       }
       asta(index);
     }
@@ -307,6 +315,11 @@ public void shellMain() {
       }
       else if(num==3){
         sceneIndex=2;
+        index=0;
+      }
+      else if(num==2){
+        sceneIndex=sceneIndex-1;
+        index=0;
       }
       asta(index);
     }
@@ -318,6 +331,11 @@ public void shellMain() {
       }
       else if(num==3){
         sceneIndex=2;
+        index=0;
+      }
+      else if(num==2){
+        sceneIndex=sceneIndex-1;
+        index=0;
       }
       asta(index);
     }

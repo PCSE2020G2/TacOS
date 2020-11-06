@@ -39,7 +39,6 @@
 int index=0;
 int sceneIndex=0;
 int playIndex=0;
-int screenNum=0;
 
 //-----------------------------------------------------------------------------
 // スイッチの読み取り
@@ -166,11 +165,7 @@ void demoScreen4() {///////3toonaji saisyo
   putStr("Back");
 }
 
-void demoScreen5() {
-  cls();                                            // LCDをクリアする
-}
-
-void demoScreen6() { //playlist
+void demoScreen5() { //playlist
   cls();                                            // LCDをクリアする
   locateXY(0,0);
     char[] fname = mp3FilesGetName(1);              // 対応するファイル名
@@ -192,34 +187,16 @@ void demoScreen6() { //playlist
 //  putStr("Playlist7");
 }
 
+void demoScreen6() {
+  cls();                                            // LCDをクリアする
+}
 
 void asta(int y) {
-  demoScreen();
+//  demoScreen();
   locateXY(0, y+1);
   putCh('*');
 }
 
-void pass(){
-  int[] pwd = malloc(sizeof(int)*4);
-  pwd[0]=1;
-  pwd[1]=5;
-  pwd[2]=1;
-  pwd[3]=5;
-  int i=0;
-  int sw;
-  int num;
-  for(;;){
-    sw=readSw();
-    num=swToNum(sw);
-    if(pwd[i]==num)
-      i=i+1;
-    else i=0;
-    if (i==4){
-     free(pwd);
-     break;
-    }
-  }
-}
 
 void updateIndex(int num){
   if (num==1) {
@@ -275,6 +252,7 @@ public void shellMain() {
     }
     sleep(10);                                      // 10ms に一度
   }
+
   for (;;) {                  //2
     int sw = readSw();
     int num = swToNum(sw);
@@ -283,12 +261,13 @@ public void shellMain() {
       demoScreen2();
       if (num==1||num==5) {
         updateIndex(num);
+        playIndex=index;
       }
       else if(num==3){
-        sceneIndex=2;
+        sceneIndex=sceneIndex+1;
         index=0;
       }
-
+      demoScreen2();
       asta(index);
     }
 
@@ -305,6 +284,7 @@ public void shellMain() {
         sceneIndex=sceneIndex-1;
         index=0;
       }
+      demoScreen3();
       asta(index);
     }
 
@@ -314,13 +294,14 @@ public void shellMain() {
         updateIndex(num);
       }
       else if(num==3){
-        sceneIndex=2;
+        sceneIndex=sceneIndex+1;
         index=0;
       }
       else if(num==2){
         sceneIndex=sceneIndex-1;
         index=0;
       }
+      demoScreen4();
       asta(index);
     }
 
@@ -329,14 +310,15 @@ public void shellMain() {
       if (num==1||num==5) {
         updateIndex(num);
       }
-      else if(num==3){
-        sceneIndex=2;
-        index=0;
-      }
+  //    else if(num==3){
+  //      sceneIndex=sceneIndex+1;
+  //      index=0;
+  //    }
       else if(num==2){
         sceneIndex=sceneIndex-1;
         index=0;
       }
+      demoScreen5();
       asta(index);
     }
 

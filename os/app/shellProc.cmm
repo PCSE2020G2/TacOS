@@ -159,9 +159,9 @@ void demoScreen4() {///////3toonaji saisyo
   if (fname!=null) putStr(fname);
   locateXY(2,1);
   putStr("Previous music");
-  locateXY(2,3);
+  locateXY(2,2);
   putStr("Next music");
-  locateXY(2,5);
+  locateXY(2,3);
   putStr("Back");
 }
 

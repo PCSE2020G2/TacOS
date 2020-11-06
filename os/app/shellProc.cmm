@@ -146,7 +146,7 @@ void demoScreen3() {
   }
 */
   char[][] fname = getListContents(playIndex,index);
-  if (getLenList(playIndex) - (index/7)*7  >= 7){
+  if (getLenList(playIndex)+7 - (index/7)*7  >= 7){
     for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
       locateXY(1,i);
                 // 対応するファイル名

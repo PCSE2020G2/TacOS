@@ -147,7 +147,6 @@ void demoScreen3() {
 */
   char[][] fname = getListContents(playIndex,index);
   int ind = index/7;
-  dbgPutCh(chr(ord('0')+ind));
   if (getLenList(playIndex) - ind*7  >= 7){
     for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
       locateXY(1,i);
@@ -170,7 +169,7 @@ void demoScreen4() {///////3toonaji saisyo
   cls();                                            // LCDをクリアする
   locateXY(0,0);
   char[][] fname = getListContents(playIndex,musicindex);              // 対応するファイル名
-  if (fname[musicindex]!=null) putStr(fname[musicindex]);
+  if (fname[musicindex%7]!=null) putStr(fname[musicindex%7]);
   locateXY(1,1);
   putStr("Play");
   locateXY(1,2);
@@ -259,7 +258,7 @@ public void shellMain() {
       }
       else if(cnt==1){
         if(num==5){
-          cnt=cnt+1;
+          cnt=cnt+1;  dbgPutCh(chr(ord('0')+ind));
         }
         else cnt=0;
       }
@@ -348,7 +347,7 @@ public void shellMain() {
         else if(num==3){
           if(index==0){
             char[][] fname = getListContents(playIndex,musicindex);
-            play(fnameToPath(fname[musicindex%7]))
+            play(fnameToPath(fname[musicindex%7]));
             //play(mp3FilesGetPath(musicindex+1));
           }//play
           else if(index==1){stop();}//Stop

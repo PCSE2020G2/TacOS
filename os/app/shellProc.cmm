@@ -305,7 +305,7 @@ public void shellMain() {
           updateIndex(num,getLenList(playIndex)-1); //yamane
           demoScreen3();
         }
-        else if(num==3){
+        else if(num==3&&getLenList(playIndex)>0){
           sceneIndex=sceneIndex+1;
           musicindex=index;
           index=0;

@@ -43,14 +43,14 @@ public int getLenList(int m){
   return b;
 }
 
-//カーソルの位置から6曲分の曲名を返す
+//カーソルの位置から7曲分の曲名を返す
 //m:プレイリストの値
 //n:カーソルの位置
 public char[][] getListContents(int m, int n){
   //fnames0の初期化
   char[][] fnames0;
-  fnames0 = malloc(sizeof(void[])*6);
-  for(int i=0; i<6; i=i+1){
+  fnames0 = malloc(sizeof(void[])*7);
+  for(int i=0; i<7; i=i+1){
     fnames0[i] = malloc(sizeof(int)*13);
   }
 
@@ -63,8 +63,8 @@ public char[][] getListContents(int m, int n){
     j=j+1;
   }
 
-  int k=0;   //jから6つの曲名（musicIndex==1になる）をfnames0に格納
-  while(k<6 && j<numFile){
+  int k=0;   //jから7つの曲名（musicIndex==1になる）をfnames0に格納
+  while(k<7 && j<numFile){
     if(musicIndex[m][j]==1){
       fnames0[k] = fnames[j];
       k=k+1;

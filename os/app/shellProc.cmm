@@ -122,7 +122,7 @@ void demoScreen2() {
   locateXY(1,7);
   putStr("Playlist6");
 }
-
+char[][] fname = array(7,13);
 void demoScreen3() {
   cls();                                            // LCDをクリアする
   locateXY(0,0);
@@ -134,12 +134,20 @@ void demoScreen3() {
     //locateXY(8,0)
     putCh(chr(ord('0')+playIndex));
   }
-  for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
-    locateXY(1,i);
-//    char[] fname = getListContents(playIndex,index);              // 対応するファイル名
-    char[] fname = mp3FilesGetName(index+i);              // 対応するファイル名
-    if (fname!=null) putStr(fname);
+
+  if(index%6==0) fname = getListContents(playIndex,index);
+  for (int i=0; i<7; i=i+1){
+    locateXY(1,i+1);
+    if (fname[i]!=null) putStr(fname[i]);
   }
+
+
+//  for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
+//    locateXY(1,i);
+//    char[] fname = getListContents(playIndex,index);              // 対応するファイル名
+//    char[] fname = mp3FilesGetName(index+i-1);              // 対応するファイル名
+//    if (fname!=null) putStr(fname);
+//  }
 }
 
 void demoScreen4() {///////3toonaji saisyo
@@ -285,7 +293,7 @@ public void shellMain() {
       else if(sceneIndex==2){ //music select
         demoScreen3();
         if (num==1||num==5) {
-          updateIndex(num,getLenList(playIndex)); //yamane
+          updateIndex(num,getLenList(playIndex)-1); //yamane
           demoScreen3();
         }
         else if(num==3){
@@ -297,6 +305,7 @@ public void shellMain() {
         else if(num==2){
           sceneIndex=sceneIndex-1;
           index=0;
+          playIndex=0;
           demoScreen2();
         }
         else if(num==6){

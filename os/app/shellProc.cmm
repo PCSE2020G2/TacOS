@@ -262,9 +262,11 @@ public void shellMain() {
 
     if(num>0){
       if(num==4){
+        if(sceneIndex!=5){
         tmpscene=sceneIndex;
         sceneIndex=5;
         demoScreen6();
+        }
         continue;
       }
       if(sceneIndex==1){

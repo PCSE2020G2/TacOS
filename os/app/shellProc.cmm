@@ -29,6 +29,7 @@
  */
 #include <kernel.hmm>
 #include <util.hmm>
+#include <mm.hmm>
 #include "lcd.hmm"
 #include "mp3Proc.hmm"
 #include "spi.hmm"
@@ -199,7 +200,11 @@ void asta(int y) {
 }
 
 void pass(){
-  int pwd[4]={1,5,1,5};
+  int[] pwd = malloc(sizeof(int)*4);
+  pwd[0]=1;
+  pwd[1]=5;
+  pwd[2]=1;
+  pwd[3]=5;
   int i=0;
   int sw;
   int num;
@@ -209,6 +214,10 @@ void pass(){
     if(pwd[i]==num)
       i=i+1;
     else i=0;
+    if (i==4){
+     free(pwd);
+     break;
+    }
   }
 }
 

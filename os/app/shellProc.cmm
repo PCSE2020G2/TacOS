@@ -96,19 +96,6 @@ void changeindex(int num){
 //-----------------------------------------------------------------------------
 // 画面表示
 //-----------------------------------------------------------------------------
-void demoScreen(){
-  cls();                                            // LCDをクリアする
-  locateXY(0,0); putStr("MP3 Player demo");
-  for (int i=1; i<=5; i=i+1) {                      // スイッチ1〜5に付いて
-    locateXY(2,i+1);
-    putCh(chr(ord('0')+i));                         // スイッチの番号
-    putStr(":");
-    char[] fname = mp3FilesGetName(i);              // 対応するファイル名
-    if (fname!=null) putStr(fname);
-  }
-  locateXY(2,7);
-  putStr("6:stop");                                 // 6番のスイッチ
-}
 
 
 void demoScreen1() {
@@ -149,7 +136,8 @@ void demoScreen3() {
   }
   for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
     locateXY(1,i);
-    char[] fname = mp3FilesGetName(musicindex);              // 対応するファイル名
+//    char[] fname = getListContents(playIndex,index);              // 対応するファイル名
+    char[] fname = mp3FilesGetName(index+i);              // 対応するファイル名
     if (fname!=null) putStr(fname);
   }
 }
@@ -204,7 +192,7 @@ void demoScreen6() {
 
 void asta(int y) {
 //  demoScreen();
-  y=y%6;
+  y=y%7;
   locateXY(0, y+1);
   putCh('*');
 }
@@ -228,7 +216,6 @@ public void shellMain() {
   spiResetLcd();                                    // sleepを使用するので
   spiResetMp3();                                    //   プロセスが実行する
   mp3FilesInit();                                   // ファイル一覧を作る
-  demoScreen();                                     // 画面を初期化
   int cnt=0;
   for (;;) {                                        // pwd画面
     int sw = readSw();
@@ -329,8 +316,10 @@ public void shellMain() {
           demoScreen4();
         }
         else if(num==3){
-          if(index==0){}//play
-          else if(index==1){}//Stop
+          if(index==0){
+          play(mp3FilesGetPath(musicindex));
+          }//play
+          else if(index==1){stop();}//Stop
           else if(index==2){
             if(musicindex!=0) musicindex=musicindex-1;
           }
@@ -382,24 +371,4 @@ public void shellMain() {
 
     sleep(10);                                      // 10ms に一度
   }
-
-  for (;;) {                  //2
-    int sw = readSw();
-    int num = swToNum(sw);
-
-    if (num==1||num==5) {                                   // 6 番のスイッチが押された
-      dbgPutStr("stop\n");
-      demoScreen();                                 // 画面を初期化
-      stop();
-    } else if (num>0 && mp3FilesGetName(num)!=null) { // ファイルと対応するボタン
-      demoScreen();                                 // 画面を初期化
-      changeindex(num);
-      asta(index);                                    // 再生中の曲に印を表示
-      play(mp3FilesGetPath(num));                   // 再生開始
-      dbgPutStr(mp3FilesGetPath(num));
-      dbgPutStr("\n");
-    }
-    sleep(10);                                      // 10ms に一度
-  }
-
 }

@@ -35,6 +35,9 @@
 #include "mp3Files.hmm"
 #include "shellProc.hmm"
 
+int index;
+int sceneIndex;
+
 //-----------------------------------------------------------------------------
 // スイッチの読み取り
 //-----------------------------------------------------------------------------
@@ -49,6 +52,7 @@
 
 int sw0 = 0x00;                                     // 前回の状態(デバウンス前)
 int sw1 = 0x00;                                     // 前回の状態(デバウンス後)
+
 
 int readSw() {
   int sw = ~in(0x18) & SWS;                         // スイッチを読み正論理に変換
@@ -76,23 +80,85 @@ int swToNum(int sw) {
   }
   return num;
 }
-      
+
 //-----------------------------------------------------------------------------
 // 画面表示
 //-----------------------------------------------------------------------------
-void demoScreen() {
+void demoScreen1() {
   cls();                                            // LCDをクリアする
-  locateXY(0,0); putStr("MP3 Player demo");
-  for (int i=1; i<=5; i=i+1) {                      // スイッチ1〜5に付いて
-    locateXY(2,i+1);
-    putCh(chr(ord('0')+i));                         // スイッチの番号
-    putStr(":");
+    locateXY(3,4);
+    putStr("PASSWORD");
+}
+
+void demoScreen2() {
+  cls();                                            // LCDをクリアする
+  locateXY(0,0); putStr("HOME");
+  locateXY(1,1);
+  putStr("Playlist1");
+  locateXY(1,2);
+  putStr("Playlist2");
+  locateXY(1,3);
+  putStr("Playlist3");
+  locateXY(1,4);
+  putStr("Playlist4");
+  locateXY(1,5);
+  putStr("Playlist5");
+  locateXY(1,6);
+  putStr("Playlist6");
+  locateXY(1,7);
+  putStr("Playlist7");
+  }
+}
+
+void demoScreen3() {
+  cls();                                            // LCDをクリアする
+  locateXY(0,0); putStr("Playlist"&playindex);
+  for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
+    locateXY(1,i);
     char[] fname = mp3FilesGetName(i);              // 対応するファイル名
     if (fname!=null) putStr(fname);
   }
-  locateXY(2,7);
-  putStr("6:stop");                                 // 6番のスイッチ
 }
+
+void demoScreen4() {///////3toonaji saisyo
+  cls();                                            // LCDをクリアする
+  locateXY(0,0);
+  char[] fname = mp3FilesGetName(i);              // 対応するファイル名
+  if (fname!=null) putStr(fname);
+  locateXY(1,2);
+  putStr("Previous music");
+  locateXY(3,2);
+  putStr("Next music");
+  locateXY(5,2);
+  putStr("Back");
+}
+
+void demoScreen5() {
+  cls();                                            // LCDをクリアする
+}
+
+void demoScreen6() { //playlist
+  cls();                                            // LCDをクリアする
+  locateXY(0,0);
+    char[] fname = mp3FilesGetName(i);              // 対応するファイル名
+    if (fname!=null) putStr(fname);
+  }
+  locateXY(1,1);
+  putStr("Playlist1");
+  locateXY(1,2);
+  putStr("Playlist2");
+  locateXY(1,3);
+  putStr("Playlist3");
+  locateXY(1,4);
+  putStr("Playlist4");
+  locateXY(1,5);
+  putStr("Playlist5");
+  locateXY(1,6);
+  putStr("Playlist6");
+  locateXY(1,7);
+  putStr("Playlist7");
+}
+
 
 void asta(int y) {
   demoScreen();

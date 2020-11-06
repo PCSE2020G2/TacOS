@@ -212,7 +212,7 @@ void asta(int y) {
 
 void updateIndex(int num,int max){
   if (num==1) {
-    if(index==0) index=0; //下限はもらう
+    if(index<=0) index=0; //下限はもらう
     else index=index-1;
   }
   else{
@@ -315,7 +315,7 @@ public void shellMain() {
           demoScreen2();
         }
         else if(num==6){
-          sceneIndex=5;
+          sceneIndex=4;
           musicindex=index;
           index=0;
           demoScreen5();
@@ -339,7 +339,7 @@ public void shellMain() {
             if(musicindex!=0) musicindex=musicindex-1;
           }
           else if(index==3){
-            if(musicindex!=getLenList(playIndex)) musicindex=musicindex+1;
+            if(musicindex!=getLenList(playIndex)-1) musicindex=musicindex+1;
           }
         }
         else if(num==2){

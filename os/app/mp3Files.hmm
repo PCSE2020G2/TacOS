@@ -35,3 +35,4 @@ public int getLenList(int m);              //プレイリストに入ってい�
 public void mp3FilesInit();
 public int[] getPM(int n);
 public char[][] getListContents(int m, int n);
+public void managePlaylist(int a, int b);

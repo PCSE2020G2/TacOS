@@ -216,8 +216,11 @@ void updateIndex(int num,int max){
     else index=index-1;
   }
   else{
-    if(index>=max) index=max; //上限はもらう
-    else index=index+1;
+    if(max<0){index=0;}
+    else{
+      if(index>=max) index=max; //上限はもらう
+      else index=index+1;
+    }
   }
 }
 
@@ -339,7 +342,7 @@ public void shellMain() {
             if(musicindex!=0) musicindex=musicindex-1;
           }
           else if(index==3){
-            if(musicindex!=getLenList(playIndex)-1) musicindex=musicindex+1;
+            if(musicindex!=getLenList(playIndex)) musicindex=musicindex+1;
           }
         }
         else if(num==2){
@@ -367,6 +370,7 @@ public void shellMain() {
           demoScreen3();
         }
         else if(num==6){
+          managePlaylist(playIndex,musicindex);
           //yamane
         }
         asta(index);

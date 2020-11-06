@@ -54,9 +54,10 @@ public char[][] getListContents(int m, int n){
     fnames0[i] = malloc(sizeof(int)*13);
   }
 
+
   int i=0;
   int j=0;   //fnames参照用
-  while(i<n){
+  while(i<((n/7)*7)){
     if(musicIndex[m][j]==1){
       i=i+1;
     }

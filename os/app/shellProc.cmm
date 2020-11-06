@@ -257,76 +257,77 @@ public void shellMain() {
     int sw = readSw();
     int num = swToNum(sw);
 
-    if(sceneIndex==1){
-      demoScreen2();
-      if (num==1||num==5) {
-        updateIndex(num);
-        playIndex=index;
+    if(num>0){
+      if(sceneIndex==1){
+        demoScreen2();
+        if (num==1||num==5) {
+          updateIndex(num);
+          playIndex=index;
+        }
+        else if(num==3){
+          sceneIndex=sceneIndex+1;
+          index=0;
+        }
+        demoScreen2();
+        asta(index);
       }
-      else if(num==3){
-        sceneIndex=sceneIndex+1;
-        index=0;
+
+      else if(sceneIndex==2){
+        demoScreen3();
+        if (num==1||num==5) {
+          updateIndex(num);
+        }
+        else if(num==3){
+          sceneIndex=sceneIndex+1;
+          index=0;
+        }
+        else if(num==2){
+          sceneIndex=sceneIndex-1;
+          index=0;
+        }
+        demoScreen3();
+        asta(index);
       }
-      demoScreen2();
-      asta(index);
+
+      else if(sceneIndex==3){
+        demoScreen4();
+        if (num==1||num==5) {
+          updateIndex(num);
+        }
+        else if(num==3){
+          sceneIndex=sceneIndex+1;
+          index=0;
+        }
+        else if(num==2){
+          sceneIndex=sceneIndex-1;
+          index=0;
+        }
+        demoScreen4();
+        asta(index);
+      }
+
+      else if(sceneIndex==4){
+        demoScreen5();
+        if (num==1||num==5) {
+          updateIndex(num);
+        }
+    //    else if(num==3){
+    //      sceneIndex=sceneIndex+1;
+    //      index=0;
+    //    }
+        else if(num==2){
+          sceneIndex=sceneIndex-1;
+          index=0;
+        }
+        demoScreen5();
+        asta(index);
+      }
+
+
+      else if(sceneIndex==5){
+        demoScreen6();
+      }
     }
-
-    else if(sceneIndex==2){
-      demoScreen3();
-      if (num==1||num==5) {
-        updateIndex(num);
-      }
-      else if(num==3){
-        sceneIndex=2;
-        index=0;
-      }
-      else if(num==2){
-        sceneIndex=sceneIndex-1;
-        index=0;
-      }
-      demoScreen3();
-      asta(index);
-    }
-
-    else if(sceneIndex==3){
-      demoScreen4();
-      if (num==1||num==5) {
-        updateIndex(num);
-      }
-      else if(num==3){
-        sceneIndex=sceneIndex+1;
-        index=0;
-      }
-      else if(num==2){
-        sceneIndex=sceneIndex-1;
-        index=0;
-      }
-      demoScreen4();
-      asta(index);
-    }
-
-    else if(sceneIndex==4){
-      demoScreen5();
-      if (num==1||num==5) {
-        updateIndex(num);
-      }
-  //    else if(num==3){
-  //      sceneIndex=sceneIndex+1;
-  //      index=0;
-  //    }
-      else if(num==2){
-        sceneIndex=sceneIndex-1;
-        index=0;
-      }
-      demoScreen5();
-      asta(index);
-    }
-
-
-    else if(sceneIndex==5){
-      demoScreen6();
-    }
-
 
     sleep(10);                                      // 10ms に一度
   }

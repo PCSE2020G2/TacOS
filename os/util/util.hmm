@@ -456,6 +456,7 @@ public boolean unputBuf(RingBuf buf);
  *             デバッグ目的以外で使用してはならない
  */
 public void dbgPutStr(char[] str);            // ちょっとした動作確認用
+public void dbgPutCh(char c);
 
 /*-----------------------------------------------------------------------------
  *   名前    : panic

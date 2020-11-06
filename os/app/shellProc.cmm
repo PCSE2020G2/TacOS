@@ -157,11 +157,11 @@ void demoScreen4() {///////3toonaji saisyo
   locateXY(0,0);
   char[] fname = mp3FilesGetName(1);              // 対応するファイル名
   if (fname!=null) putStr(fname);
-  locateXY(2,1);
+  locateXY(1,1);
   putStr("Previous music");
-  locateXY(2,2);
+  locateXY(1,2);
   putStr("Next music");
-  locateXY(2,3);
+  locateXY(1,3);
   putStr("Back");
 }
 
@@ -170,18 +170,19 @@ void demoScreen5() { //playlist
   locateXY(0,0);
     char[] fname = mp3FilesGetName(1);              // 対応するファイル名
     if (fname!=null) putStr(fname);
-
   locateXY(1,1);
-  putStr("Playlist1");
+  putStr("---");
   locateXY(1,2);
-  putStr("Playlist2");
+  putStr("Playlist1");
   locateXY(1,3);
-  putStr("Playlist3");
+  putStr("Playlist2");
   locateXY(1,4);
-  putStr("Playlist4");
+  putStr("Playlist3");
   locateXY(1,5);
-  putStr("Playlist5");
+  putStr("Playlist4");
   locateXY(1,6);
+  putStr("Playlist5");
+  locateXY(1,7);
   putStr("Playlist6");
 //  locateXY(1,7);
 //  putStr("Playlist7");

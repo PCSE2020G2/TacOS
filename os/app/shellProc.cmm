@@ -146,19 +146,29 @@ void demoScreen3() {
   }
 */
   char[][] fname = getListContents(playIndex,index);
-  for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
-    locateXY(1,i);
+  if (getLenList(playIndex) - index >= 7){
+    for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
+      locateXY(1,i);
                 // 対応するファイル名
 //    char[] fname = mp3FilesGetName(index+i-1);              // 対応するファイル名
-    if (fname[i-1]!=null) putStr(fname[i-1]);
+      if (fname[i-1]!=null) putStr(fname[i-1]);
+    }
+  }
+  else{
+    for (int i=1; i<=getLenList(playIndex) - index; i=i+1) {                      // スイッチ1〜5に付いて
+      locateXY(1,i);
+                // 対応するファイル名
+//    char[] fname = mp3FilesGetName(index+i-1);              // 対応するファイル名
+      if (fname[i-1]!=null) putStr(fname[i-1]);
+    }
   }
 }
 
 void demoScreen4() {///////3toonaji saisyo
   cls();                                            // LCDをクリアする
   locateXY(0,0);
-  char[] fname = mp3FilesGetName(musicindex);              // 対応するファイル名
-  if (fname!=null) putStr(fname);
+  char[][] fname = getListContents(playIndex,musicindex);              // 対応するファイル名
+  if (fname[musicindex]!=null) putStr(fname[musicindex]);
   locateXY(1,1);
   putStr("Play");
   locateXY(1,2);

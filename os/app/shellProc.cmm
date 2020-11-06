@@ -39,6 +39,7 @@
 int index=0;
 int sceneIndex=0;
 int playIndex=0;
+int tmpscene=-1;
 
 //-----------------------------------------------------------------------------
 // スイッチの読み取り
@@ -259,17 +260,25 @@ public void shellMain() {
     int num = swToNum(sw);
 
     if(num>0){
+      if(num==4){
+        tmpscene=sceneIndex;
+        sceneIndex=5;
+        demoScreen6();
+        continue;
+      }
       if(sceneIndex==1){
         demoScreen2();
         if (num==1||num==5) {
           updateIndex(num);
           playIndex=index;
+          demoScreen2();
         }
         else if(num==3){
           sceneIndex=sceneIndex+1;
           index=0;
+          demoScreen3();
         }
-        demoScreen2();
+
         asta(index);
       }
 
@@ -277,16 +286,19 @@ public void shellMain() {
         demoScreen3();
         if (num==1||num==5) {
           updateIndex(num);
+          demoScreen3();
         }
         else if(num==3){
           sceneIndex=sceneIndex+1;
           index=0;
+          demoScreen4();
         }
         else if(num==2){
           sceneIndex=sceneIndex-1;
           index=0;
+          demoScreen2();
         }
-        demoScreen3();
+
         asta(index);
       }
 
@@ -294,16 +306,19 @@ public void shellMain() {
         demoScreen4();
         if (num==1||num==5) {
           updateIndex(num);
+          demoScreen4();
         }
         else if(num==3){
           sceneIndex=sceneIndex+1;
           index=0;
+          demoScreen5();
         }
         else if(num==2){
           sceneIndex=sceneIndex-1;
           index=0;
+          demoScreen3();
         }
-        demoScreen4();
+
         asta(index);
       }
 
@@ -311,6 +326,7 @@ public void shellMain() {
         demoScreen5();
         if (num==1||num==5) {
           updateIndex(num);
+          demoScreen5();
         }
     //    else if(num==3){
     //      sceneIndex=sceneIndex+1;
@@ -319,14 +335,20 @@ public void shellMain() {
         else if(num==2){
           sceneIndex=sceneIndex-1;
           index=0;
+          demoScreen4();
         }
-        demoScreen5();
+
         asta(index);
       }
 
 
       else if(sceneIndex==5){
-        demoScreen6();
+        sceneIndex=tmpscene;
+        tmpscene=-1;
+        if(sceneIndex==1) demoScreen2();
+        else if(sceneIndex==2) demoScreen3();
+        else if(sceneIndex==3) demoScreen4();
+        else if(sceneIndex==4) demoScreen5();
       }
     }
 

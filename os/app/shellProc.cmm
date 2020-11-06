@@ -347,7 +347,7 @@ public void shellMain() {
         }
         else if(num==3){
           if(index==0){
-            play(mp3FilesGetPath(musicindex));
+            play(mp3FilesGetPath(musicindex+1));
           }//play
           else if(index==1){stop();}//Stop
           else if(index==2){

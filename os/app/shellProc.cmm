@@ -109,6 +109,7 @@ public void shellMain() {
   spiResetMp3();                                    //   プロセスが実行する
   mp3FilesInit();                                   // ファイル一覧を作る
   demoScreen();                                     // 画面を初期化
+//  dbgPutStr(getLenList(0))
   for (;;) {
     int sw = readSw();
     int num = swToNum(sw);

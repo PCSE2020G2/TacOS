@@ -29,11 +29,17 @@
  */
 #include <kernel.hmm>
 #include <util.hmm>
+#include <mm.hmm>
 #include "lcd.hmm"
 #include "mp3Proc.hmm"
 #include "spi.hmm"
 #include "mp3Files.hmm"
 #include "shellProc.hmm"
+
+int index=0;
+int sceneIndex;
+int playIndex;
+int screenNum;
 
 //-----------------------------------------------------------------------------
 // スイッチの読み取り
@@ -49,6 +55,7 @@
 
 int sw0 = 0x00;                                     // 前回の状態(デバウンス前)
 int sw1 = 0x00;                                     // 前回の状態(デバウンス後)
+
 
 int readSw() {
   int sw = ~in(0x18) & SWS;                         // スイッチを読み正論理に変換
@@ -76,11 +83,19 @@ int swToNum(int sw) {
   }
   return num;
 }
-      
+
+void changeindex(int num){
+  if(num==1){
+    index=index-1;
+  } else if(num==5){
+    index=index+1;
+  }
+}
+
 //-----------------------------------------------------------------------------
 // 画面表示
 //-----------------------------------------------------------------------------
-void demoScreen() {
+void demoScreen(){
   cls();                                            // LCDをクリアする
   locateXY(0,0); putStr("MP3 Player demo");
   for (int i=1; i<=5; i=i+1) {                      // スイッチ1〜5に付いて
@@ -94,10 +109,116 @@ void demoScreen() {
   putStr("6:stop");                                 // 6番のスイッチ
 }
 
+
+void demoScreen1() {
+  cls();                                            // LCDをクリアする
+    locateXY(4,4);
+    putStr("PASSWORD");
+}
+
+void demoScreen2() {
+  cls();                                            // LCDをクリアする
+  locateXY(0,0); putStr("HOME");
+  locateXY(1,1);
+  putStr("ALL");
+  locateXY(1,2);
+  putStr("Playlist1");
+  locateXY(1,3);
+  putStr("Playlist2");
+  locateXY(1,4);
+  putStr("Playlist3");
+  locateXY(1,5);
+  putStr("Playlist4");
+  locateXY(1,6);
+  putStr("Playlist5");
+  locateXY(1,7);
+  putStr("Playlist6");
+}
+
+void demoScreen3() {
+  cls();                                            // LCDをクリアする
+  locateXY(0,0);
+  if (playIndex==0){
+    putStr("ALL");
+  }
+  else{
+    putStr("Playlist");
+    //locateXY(8,0)
+    putCh(chr(ord('0')+playIndex));
+  }
+  for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
+    locateXY(1,i);
+    char[] fname = mp3FilesGetName(1);              // 対応するファイル名
+    if (fname!=null) putStr(fname);
+  }
+}
+
+void demoScreen4() {///////3toonaji saisyo
+  cls();                                            // LCDをクリアする
+  locateXY(0,0);
+  char[] fname = mp3FilesGetName(1);              // 対応するファイル名
+  if (fname!=null) putStr(fname);
+  locateXY(2,1);
+  putStr("Previous music");
+  locateXY(2,3);
+  putStr("Next music");
+  locateXY(2,5);
+  putStr("Back");
+}
+
+void demoScreen5() {
+  cls();                                            // LCDをクリアする
+}
+
+void demoScreen6() { //playlist
+  cls();                                            // LCDをクリアする
+  locateXY(0,0);
+    char[] fname = mp3FilesGetName(1);              // 対応するファイル名
+    if (fname!=null) putStr(fname);
+
+  locateXY(1,1);
+  putStr("Playlist1");
+  locateXY(1,2);
+  putStr("Playlist2");
+  locateXY(1,3);
+  putStr("Playlist3");
+  locateXY(1,4);
+  putStr("Playlist4");
+  locateXY(1,5);
+  putStr("Playlist5");
+  locateXY(1,6);
+  putStr("Playlist6");
+//  locateXY(1,7);
+//  putStr("Playlist7");
+}
+
+
 void asta(int y) {
   demoScreen();
   locateXY(0, y+1);
   putCh('*');
+}
+
+void pass(){
+  int[] pwd = malloc(sizeof(int)*4);
+  pwd[0]=1;
+  pwd[1]=5;
+  pwd[2]=1;
+  pwd[3]=5;
+  int i=0;
+  int sw;
+  int num;
+  for(;;){
+    sw=readSw();
+    num=swToNum(sw);
+    if(pwd[i]==num)
+      i=i+1;
+    else i=0;
+    if (i==4){
+     free(pwd);
+     break;
+    }
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -118,7 +239,8 @@ public void shellMain() {
       stop();
     } else if (num>0 && mp3FilesGetName(num)!=null) { // ファイルと対応するボタン
       demoScreen();                                 // 画面を初期化
-      asta(num);                                    // 再生中の曲に印を表示
+      changeindex(num);
+      asta(index);                                    // 再生中の曲に印を表示
       play(mp3FilesGetPath(num));                   // 再生開始
       dbgPutStr(mp3FilesGetPath(num));
       dbgPutStr("\n");

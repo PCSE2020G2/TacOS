@@ -38,7 +38,7 @@
 char[] buf = array(32);
 
 // ディレクトリの読出しバッファ
-Dir dir = {"             ", 0, 0, 0, 0 };
+Dir1 dir = {"             ", 0, 0, 0, 0 };
 
 // ファイル名のコピー
 int cpName(int i, int j, int n) {
@@ -54,7 +54,7 @@ int cpName(int i, int j, int n) {
 // ディレクトリから１エントリー読み出す（EOF では null を返す）
 //   fd  : オープン済みのディレクトリファイル
 //   ext : 拡張子（nullの場合は拡張子は関係ない）
-public Dir readDir(int fd, char[] ext) {
+public Dir1 readDir1(int fd, char[] ext) {
   while (read(fd, buf, 32)==32) {              // EOF まで
     char flag = buf[0];                        //   エントリの先頭１バイト
     int  attr = ord(buf[11]);                  //   属性

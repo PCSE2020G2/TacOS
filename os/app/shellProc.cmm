@@ -147,7 +147,7 @@ void demoScreen3() {
 */
   char[][] fname = getListContents(playIndex,index);
   int ind = index/7;
-  int ind1 = getLenList(playIndex) - ind*7;
+  dbgPutCh(chr(ord('0')+ind));
   if (getLenList(playIndex) - ind*7  >= 7){
     for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
       locateXY(1,i);
@@ -157,7 +157,7 @@ void demoScreen3() {
     }
   }
   else{
-    for (int i=1; i<=ind1; i=i+1) {                      // スイッチ1〜5に付いて
+    for (int i=1; i<=getLenList(playIndex) - ind*7; i=i+1) {                      // スイッチ1〜5に付いて
       locateXY(1,i);
                 // 対応するファイル名
 //    char[] fname = mp3FilesGetName(index+i-1);              // 対応するファイル名
@@ -358,6 +358,7 @@ public void shellMain() {
           else if(index==3){
             if(musicindex<getLenList(playIndex)-1) musicindex=musicindex+1;
           }
+          demoScreen4();
         }
         else if(num==2){
           sceneIndex=sceneIndex-1;
@@ -386,6 +387,7 @@ public void shellMain() {
         else if(num==6){
           if (index!=0){
             managePlaylist(index, musicindex);
+            demoScreen5();
           }
           //yamane
         }

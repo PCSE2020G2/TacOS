@@ -162,7 +162,7 @@ void dbgPutSIO(char c) {                            // SIO への出力
   out(0x08, ord(c));
 }
 
-public void dbgPutCh(char c) {                             // デバッグ用の表示ルーチン
+void dbgPutCh(char c) {                             // デバッグ用の表示ルーチン
   if (c=='\n') dbgPutSIO('\r');
   dbgPutSIO(c);
 }

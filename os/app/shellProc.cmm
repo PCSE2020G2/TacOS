@@ -147,7 +147,6 @@ void demoScreen3() {
 */
   char[][] fname = getListContents(playIndex,index);
   int ind = index/7;
-  dbgPutCh(chr(ord('0')+ind));
   if (getLenList(playIndex) - ind*7  >= 7){
     for (int i=1; i<=7; i=i+1) {                      // スイッチ1〜5に付いて
       locateXY(1,i);
